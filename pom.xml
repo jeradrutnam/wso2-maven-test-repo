@@ -13,9 +13,9 @@
     </parent>
 
     <scm>
-        <url>https://github.com/kasunbg/crispy-giggle-prod.git</url>
-        <developerConnection>scm:git:https://github.com/kasunbg/crispy-giggle-prod.git</developerConnection>
-        <connection>scm:git:https://github.com/kasunbg/crispy-giggle-prod.git</connection>
+        <url>https://github.com/jeradrutnam/wso2-maven-test-repo.git</url>
+        <developerConnection>scm:git:https://github.com/jeradrutnam/wso2-maven-test-repo.git</developerConnection>
+        <connection>scm:git:https://github.com/jeradrutnam/wso2-maven-test-repo.git</connection>
         <tag>HEAD</tag>
     </scm>
 
