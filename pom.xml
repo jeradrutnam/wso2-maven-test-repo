@@ -56,8 +56,8 @@
       <artifactId>ballerina-sql</artifactId>
      <version>0.992.0-m1</version>
    </dependency>
-  </dependencies>
    -->
+   </dependencies>
 
 </project>
 
