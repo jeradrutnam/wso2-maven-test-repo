@@ -2,5 +2,5 @@
     "packages": [
         "modules/*"
     ],
-    "version": "0.1.130-SNAPSHOT"
+    "version": "1.0.33-SNAPSHOT"
 }

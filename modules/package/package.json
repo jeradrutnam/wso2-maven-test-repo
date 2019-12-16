@@ -1,6 +1,6 @@
 {
     "name": "@wso2/mytest-package",
-    "version": "0.1.130-SNAPSHOT",
+    "version": "1.0.33-SNAPSHOT",
     "description": "WSO2 Test Package",
     "keywords": [
         "WSO2"
