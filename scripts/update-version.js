@@ -81,17 +81,20 @@ if (args.jenkins){
     const BUILD = "[Jenkins " + args.build + "] " || "";
     const RELEASE = "[Release " + args.pom + "] " || "";
     
+    console.log("stage version updated files");
+    
     git.status().then((status) => {
         status.files.map((file) => {
             const filePath = file.path;
             const fileName = filePath.split("/").slice(-1)[0];
             
             if(packageFiles.includes(fileName)) {
-                console.log(filePath);
                 git.add(filePath);
             }
         });
     });
+    
+    console.log("commit staged files");
     
     git.commit("[WSO2 Release]"+ BUILD +" "+ RELEASE +
                " Update package versions");
