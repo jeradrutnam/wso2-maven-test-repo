@@ -25,14 +25,15 @@
 
 const path = require('path');
 const fs = require('fs-extra');
+const glob = require('glob-fs')({ gitignore: true });
 const XmlParser = require('fast-xml-parser');
 const { execSync } = require('child_process');
 
 const packageJson =  path.join(__dirname, "..", "package.json");
 const pomXml = path.join(__dirname, "..", "pom.xml");
-const buildDir = path.join(__dirname);
+const workingDir = path.join(__dirname, "..");
 
-const git = require('simple-git')(buildDir);
+const git = require('simple-git')(workingDir);
 
 const getProjectVersion = function() {
     const fileContent = fs.readFileSync(pomXml);
@@ -48,7 +49,6 @@ packageJsonContent.version = getProjectVersion();
 /**
  * Update package, package-lock, lerna json files
  */
-
 fs.writeFileSync(packageJson, JSON.stringify(packageJsonContent, null, 4)+"\n");
 
 execSync("npx lerna version " + getProjectVersion() + " --yes --no-git-tag-version",
@@ -61,7 +61,6 @@ console.log("update packages version to " + getProjectVersion());
 /**
  * Collect args
  */
-
 const processArgs = process.argv.slice(2);
 let args = {};
 
@@ -75,14 +74,10 @@ processArgs.forEach(function(arg, index){
  * Stage changed files
  */
 if (args.jenkins){
-    const Build = "[Jenkins " + args.build + "] " || "";
-    const Release = "[Release " + args.pom + "] " || "";
+    const BUILD = "[Jenkins " + args.build + "] " || "";
+    const RELEASE = "[Release " + args.pom + "] " || "";
 
     git
-        .add("package.json")
-        .add("/**/package.json")
-        .add("lerna.json")
-        .add("package-lock.json")
-        .add("/**/package-lock.json")
-        .commit("[WSO2 Release]"+ Build +" "+ Release +" Update package versions");
+        .add("./*")
+        .commit("[WSO2 Release]"+ BUILD +" "+ RELEASE +" Update package versions");
 }

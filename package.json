@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "@wso2/mytest",
-    "version": "1.0.40",
+    "version": "1.0.41",
     "description": "WSO2 Test",
     "keywords": [
         "WSO2"
@@ -23,6 +23,7 @@
         "child_process": "^1.0.2",
         "fast-xml-parser": "^3.15.0",
         "fs-extra": "^8.1.0",
+        "glob-fs": "^0.1.7",
         "lerna": "^3.4.3",
         "simple-git": "^1.129.0"
     }
