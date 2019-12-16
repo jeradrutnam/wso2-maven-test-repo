@@ -29,7 +29,7 @@ const getProjectVersion = function() {
     const fileContent = fs.readFileSync(pomXml);
     const pom = XmlParser.parse(fileContent.toString());
 
-    return pom.project.version;
+    return pom.project.version.replace("-SNAPSHOT", "");
 };
 
 let packageJsonContent = require(packageJson);
