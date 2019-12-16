@@ -1,0 +1,13 @@
+{
+    "name": "@wso2/mytest-package",
+    "version": "0.1.130-SNAPSHOT",
+    "description": "WSO2 Test Package",
+    "keywords": [
+        "WSO2"
+    ],
+    "scripts": {
+        "build": "node scripts/build.js"
+    },
+    "author": "WSO2",
+    "license": "Apache-2.0"
+}
