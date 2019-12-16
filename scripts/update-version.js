@@ -19,7 +19,9 @@
 /*
  * Shell script sample for Jenkins:
  *
- * npm run update-version -- jenkins=true build=${BUILD_DISPLAY_NAME} pom=${POM_VERSION/-SNAPSHOT/}
+ * npm run update-version -- jenkins=true
+                             build=${BUILD_DISPLAY_NAME} 
+                             pom=${POM_VERSION/-SNAPSHOT/}
  *
  */
 
@@ -33,7 +35,7 @@ const packageJson =  path.join(__dirname, "..", "package.json");
 const pomXml = path.join(__dirname, "..", "pom.xml");
 const workingDir = path.join(__dirname, "..");
 
-const git = require('simple-git')(workingDir);
+const git = require('simple-git/promise')(workingDir);
 
 const getProjectVersion = function() {
     const fileContent = fs.readFileSync(pomXml);
@@ -51,7 +53,8 @@ packageJsonContent.version = getProjectVersion();
  */
 fs.writeFileSync(packageJson, JSON.stringify(packageJsonContent, null, 4)+"\n");
 
-execSync("npx lerna version " + getProjectVersion() + " --yes --no-git-tag-version",
+execSync("npx lerna version " + getProjectVersion() + 
+         " --yes --no-git-tag-version",
     { cwd: path.join(__dirname, "..") }
 );
 
@@ -69,6 +72,7 @@ processArgs.forEach(function(arg, index){
     args[argSplit[0]] = argSplit[1];
 });
 
+const packageFiles = ["package.json", "package-lock.json", "lerna.json"]
 
 /**
  * Stage changed files
@@ -76,8 +80,19 @@ processArgs.forEach(function(arg, index){
 if (args.jenkins){
     const BUILD = "[Jenkins " + args.build + "] " || "";
     const RELEASE = "[Release " + args.pom + "] " || "";
-
-    git
-        .add("./*")
-        .commit("[WSO2 Release]"+ BUILD +" "+ RELEASE +" Update package versions");
+    
+    git.status().then((status) => {
+        status.files.map((file) => {
+            const filePath = file.path;
+            const fileName = filePath.split("/").slice(-1)[0];
+            
+            if(packageFiles.includes(fileName)) {
+                console.log(filePath);
+                git.add(filePath);
+            }
+        });
+    });
+    
+    git.commit("[WSO2 Release]"+ BUILD +" "+ RELEASE +
+               " Update package versions");
 }
