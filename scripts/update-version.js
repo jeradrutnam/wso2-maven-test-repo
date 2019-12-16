@@ -17,11 +17,16 @@
  */
 
 /*
- * Shell script sample for Jenkins:
+ * Shell script for Jenkins (Post script in the build pipeline):
  *
+ * #!/usr/bin/env bash
+ * npm i
+ *
+ * # Update package version to parent pom version
  * npm run update-version -- jenkins=true
-                             build=${BUILD_DISPLAY_NAME} 
-                             pom=${POM_VERSION/-SNAPSHOT/}
+ *
+ * git commit -m "[WSO2 Release] [Jenkins ${BUILD_DISPLAY_NAME}] 
+                    [Release ${POM_VERSION/-SNAPSHOT/}] update package versions"
  *
  */
 
