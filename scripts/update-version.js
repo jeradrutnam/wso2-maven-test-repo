@@ -78,8 +78,8 @@ const packageFiles = ["package.json", "package-lock.json", "lerna.json"]
  * Stage changed files
  */
 if (args.jenkins){
-    const BUILD = "[Jenkins " + args.build + "] " || "";
-    const RELEASE = "[Release " + args.pom + "] " || "";
+//    const BUILD = "[Jenkins " + args.build + "] " || "";
+//    const RELEASE = "[Release " + args.pom + "] " || "";
     
     console.log("stage version updated files");
     
@@ -94,8 +94,8 @@ if (args.jenkins){
         });
     });
     
-    console.log("commit staged files");
-    
-    git.commit("[WSO2 Release]"+ BUILD +" "+ RELEASE +
-               " Update package versions");
+//    console.log("commit staged files");
+//    
+//    git.commit("[WSO2 Release]"+ BUILD +" "+ RELEASE +
+//               " Update package versions");
 }
