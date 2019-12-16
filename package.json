@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "@wso2/mytest",
-    "version": "1.0.38",
+    "version": "1.0.39",
     "description": "WSO2 Test",
     "keywords": [
         "WSO2"
