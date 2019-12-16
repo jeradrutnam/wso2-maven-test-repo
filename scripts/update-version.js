@@ -14,6 +14,12 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ */
+
+/*
+ * Shell script sample for Jenkins:
+ *
+ * npm run update-version -- jenkins=true build=${BUILD_DISPLAY_NAME} pom=${POM_VERSION/-SNAPSHOT/}
  *
  */
 
@@ -24,6 +30,9 @@ const { execSync } = require('child_process');
 
 const packageJson =  path.join(__dirname, "..", "package.json");
 const pomXml = path.join(__dirname, "..", "pom.xml");
+const buildDir = path.join(__dirname);
+
+const git = require('simple-git')(buildDir);
 
 const getProjectVersion = function() {
     const fileContent = fs.readFileSync(pomXml);
@@ -35,6 +44,11 @@ const getProjectVersion = function() {
 let packageJsonContent = require(packageJson);
 packageJsonContent.version = getProjectVersion();
 
+
+/**
+ * Update package, package-lock, lerna json files
+ */
+
 fs.writeFileSync(packageJson, JSON.stringify(packageJsonContent, null, 4)+"\n");
 
 execSync("npx lerna version " + getProjectVersion() + " --yes --no-git-tag-version",
@@ -42,3 +56,33 @@ execSync("npx lerna version " + getProjectVersion() + " --yes --no-git-tag-versi
 );
 
 console.log("update packages version to " + getProjectVersion());
+
+
+/**
+ * Collect args
+ */
+
+const processArgs = process.argv.slice(2);
+let args = {};
+
+processArgs.forEach(function(arg, index){
+    const argSplit = arg.split("=");
+    args[argSplit[0]] = argSplit[1];
+});
+
+
+/**
+ * Stage changed files
+ */
+if (args.jenkins){
+    const Build = "[Jenkins " + args.build + "] " || "";
+    const Release = "[Release " + args.pom + "] " || "";
+
+    git
+        .add("package.json")
+        .add("/**/package.json")
+        .add("lerna.json")
+        .add("package-lock.json")
+        .add("/**/package-lock.json")
+        .commit("[WSO2 Release]"+ Build +" "+ Release +" Update package versions");
+}
