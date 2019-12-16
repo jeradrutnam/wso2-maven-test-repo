@@ -23,9 +23,9 @@ npm run update-version
 
 # Update git repository with packages version update
 git add package.json
-git add package-lock.json
 git add lerna.json
 git add */\package.json
+git add package-lock.json
 git add */\package-lock.json
 
 git commit -m "[Release] Update package with next development version"
