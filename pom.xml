@@ -4,7 +4,7 @@
 
     <groupId>org.kasung.test</groupId>
     <artifactId>mytest</artifactId>
-    <version>1.0.41-SNAPSHOT</version>
+    <version>1.0.41</version>
 
     <parent>
         <groupId>org.wso2</groupId>
@@ -16,7 +16,7 @@
         <url>https://github.com/jeradrutnam/wso2-maven-test-repo.git</url>
         <developerConnection>scm:git:https://github.com/jeradrutnam/wso2-maven-test-repo.git</developerConnection>
         <connection>scm:git:https://github.com/jeradrutnam/wso2-maven-test-repo.git</connection>
-        <tag>HEAD</tag>
+        <tag>v1.0.41</tag>
     </scm>
 
     <build>
