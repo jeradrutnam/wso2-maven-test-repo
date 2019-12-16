@@ -29,4 +29,4 @@ git add */\package.json
 git add */\package-lock.json
 
 git commit -m "[Release] Update package with next development version"
-git push origin version-build
+git push origin master
