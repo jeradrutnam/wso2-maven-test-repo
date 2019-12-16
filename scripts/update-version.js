@@ -72,7 +72,7 @@ console.log("lerna info update packages version to " + getProjectVersion());
 const processArgs = process.argv.slice(2);
 let args = {};
 
-processArgs.forEach(function(arg, index){
+processArgs.map((arg, index) => {
     const argSplit = arg.split("=");
     args[argSplit[0]] = argSplit[1];
 });
