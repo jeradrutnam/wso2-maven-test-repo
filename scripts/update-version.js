@@ -54,7 +54,7 @@ packageJsonContent.version = getProjectVersion();
 fs.writeFileSync(packageJson, JSON.stringify(packageJsonContent, null, 4)+"\n");
 
 execSync("npx lerna version " + getProjectVersion() + 
-         " --yes --no-git-tag-version",
+         " --yes --no-git-tag-version --force-publish",
     { cwd: path.join(__dirname, "..") }
 );
 
