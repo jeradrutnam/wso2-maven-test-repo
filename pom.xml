@@ -4,7 +4,7 @@
 
     <groupId>org.jerad.test</groupId>
     <artifactId>build.test</artifactId>
-    <version>1.0.30</version>
+    <version>1.0.31-SNAPSHOT</version>
 
     <parent>
         <groupId>org.wso2</groupId>
@@ -16,7 +16,7 @@
         <url>https://github.com/jeradrutnam/wso2-maven-test-repo.git</url>
         <developerConnection>scm:git:https://github.com/jeradrutnam/wso2-maven-test-repo.git</developerConnection>
         <connection>scm:git:https://github.com/jeradrutnam/wso2-maven-test-repo.git</connection>
-        <tag>v1.0.30</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <build>
