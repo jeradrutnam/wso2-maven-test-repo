@@ -1,0 +1,25 @@
+{
+    "private": true,
+    "name": "@wso2/mytest",
+    "version": "0.1.130-SNAPSHOT",
+    "description": "WSO2 Test",
+    "keywords": [
+        "WSO2"
+    ],
+    "repository": "https://github.com/jeradrutnam/wso2-maven-test-repo.git",
+    "scripts": {
+        "prebuild": "npm i && lerna bootstrap",
+        "build": "lerna run build --stream",
+        "clean": "lerna run clean --stream",
+        "clean-all": "npm run remove-package-lock && npm run remove-maven-folders && npm run remove-node-modules",
+        "remove-node-modules": "lerna exec -- rm -rf node_modules && rm -rf node_modules",
+        "remove-package-lock": "lerna exec -- rm -rf package-lock.json && rm -rf package-lock.json",
+        "remove-maven-folders": "lerna exec -- rm -rf target npm && rm -rf target npm",
+        "update-version": "node scripts/update-version.js"
+    },
+    "author": "WSO2",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "lerna": "^3.4.3"
+    }
+}

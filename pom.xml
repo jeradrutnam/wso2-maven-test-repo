@@ -22,6 +22,44 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <version>1.6.0</version>
+                <artifactId>exec-maven-plugin</artifactId>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>npm install (initialize)</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>install</argument>
+                            </arguments>
+                            <workingDirectory>${basedir}</workingDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm run build (compile)</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>compile</phase>
+                        <configuration>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>build</argument>
+                            </arguments>
+                            <workingDirectory>${basedir}</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
@@ -32,32 +70,13 @@
         </plugins>
     </build>
     
-  <dependencies>
-    <dependency>
-     <groupId>org.wso2.carbon</groupId>
-     <artifactId>org.wso2.carbon.core</artifactId>
-     <version>4.4.0</version>
-    </dependency>
-      <!--
-    <dependency>
-     <groupId>org.opensaml</groupId>
-     <artifactId>opensaml</artifactId>
-     <version>2.6.6</version>
-    </dependency>
-
-    <dependency>
-     <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
-     <artifactId>org.wso2.carbon.identity.oauth.common</artifactId>
-     <version>6.0.168</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.ballerinalang</groupId>
-      <artifactId>ballerina-sql</artifactId>
-     <version>0.992.0-m1</version>
-   </dependency>
-   -->
-   </dependencies>
+    <dependencies>
+        <dependency>
+         <groupId>org.wso2.carbon</groupId>
+         <artifactId>org.wso2.carbon.core</artifactId>
+         <version>4.4.0</version>
+        </dependency>
+    </dependencies>
 
 </project>
 
