@@ -58,12 +58,12 @@ packageJsonContent.version = getProjectVersion();
  */
 fs.writeFileSync(packageJson, JSON.stringify(packageJsonContent, null, 4)+"\n");
 
-execSync("npx lerna clean && npx lerna bootstrap --no-ci && npx lerna version " + 
-         getProjectVersion() + " --yes --no-git-tag-version --force-publish",
+execSync("npx lerna version " + getProjectVersion() + 
+         " --yes --no-git-tag-version --force-publish && npm i",
     { cwd: path.join(__dirname, "..") }
 );
 
-console.log("update packages version to " + getProjectVersion());
+console.log("lerna info update packages version to " + getProjectVersion());
 
 
 /**
