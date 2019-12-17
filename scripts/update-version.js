@@ -32,7 +32,6 @@
 
 const path = require('path');
 const fs = require('fs-extra');
-const glob = require('glob-fs')({ gitignore: true });
 const XmlParser = require('fast-xml-parser');
 const { execSync } = require('child_process');
 
