@@ -102,6 +102,9 @@ if (args.jenkins){
                 console.log("git error failed clean: ");
                 console.log(error);
             });
+            
+            git.commit("[WSO2 Release] [Jenkins ${BUILD_DISPLAY_NAME}] " +
+                "[Release ${POM_VERSION/-SNAPSHOT/}] update package versions");
         }
     });
 }
