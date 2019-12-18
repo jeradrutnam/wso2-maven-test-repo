@@ -82,6 +82,11 @@ const packageFiles = ["package.json", "package-lock.json", "lerna.json"]
  * Stage changed files
  */
 if (args.jenkins){
+    console.log("new_build");
+    
+    const BUILD = (args.build) ? "[Jenkins " + args.build + "] " : "";	
+    const RELEASE = (args.pom) ? "[Release " + args.pom + "] " : "";
+
     git.status().then((status) => {
         if(status.files.length > 0) {
             console.log("git info start staging version updated files");
@@ -103,8 +108,8 @@ if (args.jenkins){
                 console.log(error);
             });
             
-            git.commit("[WSO2 Release] [Jenkins ${BUILD_DISPLAY_NAME}] " +
-                "[Release ${POM_VERSION/-SNAPSHOT/}] update package versions");
+            git.commit("[WSO2 Release]"+ BUILD +" "+ RELEASE +	
+               " Update package versions");
         }
     });
 }
