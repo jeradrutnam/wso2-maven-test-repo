@@ -71,7 +71,7 @@ console.log("lerna info update packages version to " + getProjectVersion());
 const processArgs = process.argv.slice(2);
 let args = {};
 
-processArgs.map((arg, index) => {
+processArgs.map((arg) => {
     const argSplit = arg.split("=");
     args[argSplit[0]] = argSplit[1];
 });
@@ -82,16 +82,27 @@ const packageFiles = ["package.json", "package-lock.json", "lerna.json"]
  * Stage changed files
  */
 if (args.jenkins){
-    console.log("stage version updated files");
-    
     git.status().then((status) => {
-        status.files.map((file) => {
-            const filePath = file.path;
-            const fileName = filePath.split("/").slice(-1)[0];
-            
-            if(packageFiles.includes(fileName)) {
-                git.add(filePath);
-            }
-        });
+        if(status.files.length > 0) {
+            console.log("git info start staging version updated files");
+
+            status.files.map((file) => {
+                const filePath = file.path;
+                const fileName = filePath.split("/").slice(-1)[0];
+                
+                if(packageFiles.includes(fileName)) {
+                    git.add(filePath);
+                    console.log("git info stage " + filePath);
+                }
+            });
+
+            console.log("git success stage version updated files");
+
+            git.clean("dfx", (error) => {
+                console.log("git error failed clean: ");
+                console.log(error);
+            });
+        }
     });
 }
+
